@@ -134,7 +134,7 @@ static blink::Settings DefaultSettingsForProcess(NSBundle* bundle = nil) {
 #pragma mark - Override base class designated initializers
 
 - (instancetype)init {
-  return [self initWithFlutterAssets:nil dartMain:nil packages:nil];
+  return [self initWithFlutterAssets:nil dartMain:nil packages:nil bundle:nil];
 }
 
 #pragma mark - Designated initializers
@@ -152,11 +152,12 @@ static blink::Settings DefaultSettingsForProcess(NSBundle* bundle = nil) {
 
 - (instancetype)initWithFlutterAssets:(NSURL*)flutterAssetsURL
                              dartMain:(NSURL*)dartMainURL
-                             packages:(NSURL*)dartPackages {
+                             packages:(NSURL*)dartPackages
+                             bundle:(NSBundle*)bundle {
   self = [super init];
 
   if (self) {
-    _settings = DefaultSettingsForProcess();
+    _settings = DefaultSettingsForProcess(bundle);
 
     if (dartMainURL != nil && [[NSFileManager defaultManager] fileExistsAtPath:dartMainURL.path]) {
       _settings.main_dart_file_path = dartMainURL.path.UTF8String;
@@ -171,11 +172,11 @@ static blink::Settings DefaultSettingsForProcess(NSBundle* bundle = nil) {
   return self;
 }
 
-- (instancetype)initWithFlutterAssetsWithScriptSnapshot:(NSURL*)flutterAssetsURL {
+- (instancetype)initWithFlutterAssetsWithScriptSnapshot:(NSURL*)flutterAssetsURL bundle:(NSBundle*)bundle {
   self = [super init];
 
   if (self) {
-    _settings = DefaultSettingsForProcess();
+    _settings = DefaultSettingsForProcess(bundle);
 
     if (flutterAssetsURL != nil &&
         [[NSFileManager defaultManager] fileExistsAtPath:flutterAssetsURL.path]) {

@@ -26,13 +26,14 @@ FLUTTER_EXPORT
  */
 - (instancetype)initWithFlutterAssets:(NSURL*)flutterAssetsURL
                              dartMain:(NSURL*)dartMainURL
-                             packages:(NSURL*)dartPackages NS_DESIGNATED_INITIALIZER;
+                             packages:(NSURL*)dartPackages
+                               bundle:(NSBundle*)bundle NS_DESIGNATED_INITIALIZER;
 
 /**
  * Initializes from a specific set of Flutter Assets.
  */
 - (instancetype)initWithFlutterAssetsWithScriptSnapshot:(NSURL*)flutterAssetsURL
-    NS_DESIGNATED_INITIALIZER;
+                                                 bundle:(NSBundle*)bundle NS_DESIGNATED_INITIALIZER;
 
 /**
  * Unavailable - use `init` instead.
